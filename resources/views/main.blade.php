@@ -2,6 +2,10 @@
 @section('content')
 
 <div id="map"></div>
+<form id="frmdetailkecamatan" method="post" action="" target="_blank">
+    @csrf
+    <input type="text" id="idkecamatan" name="idkecamatan">
+</form>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-right" role="document">
@@ -37,6 +41,18 @@
         top: 0;
         margin-top: 20px; /* Jarak dari tepi atas */
     }
+
+    .kolom-kiri{
+        padding-right: 10px;
+    }
+    .kolom-warna{
+        background-color: #e6e3dc
+    }
+    .kolom-kanan{
+        text-align:right;
+        padding-right: 8px;
+    }
+
 </style>
 @endsection
 @section('scriptfooter')
