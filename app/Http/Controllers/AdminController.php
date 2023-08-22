@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Configgeojson;
 use App\Models\Kecamatan;
 use App\Models\Desa;
+use App\Models\Penduduk;
+use App\Models\Opd;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 class AdminController extends Controller
@@ -18,6 +20,10 @@ class AdminController extends Controller
     public function __construct()
     {
 
+    }
+    function tes(Request $request){
+        //dd((Cookie::get('appkemisan')));
+        dd(getUserFromCookie(Cookie::get('appkemisan')));
     }
     function index(Request $request){
         return view('layoutbackend');
@@ -141,5 +147,28 @@ class AdminController extends Controller
             session()->flash('error', 'error server'.json_encode($t));
             return redirect('/admin/settingmap');
         }
+    }
+    function dataKemiskinan(Request $request){
+        $data=[];
+        return view('admin.datakemiskinan',$data);
+    }
+    function getDataKemiskinan(Request $request){
+        $data=[];
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        $data['data']=[];
+        $data['recordsTotal']=Penduduk::join('m_jenis_pekerjaan as mp','m_penduduk.statusbekerja','=','mp.id')->join('m_status_pendidikan as msp','m_penduduk.pendidikan','=','msp.id')->count();
+        $data['recordsFiltered']=$data['recordsTotal'];
+        $rows=Penduduk::join('m_jenis_pekerjaan as mp','m_penduduk.statusbekerja','=','mp.id')->join('m_status_pendidikan as msp','m_penduduk.pendidikan','=','msp.id')->select('nik','nama','alamat','msp.status_pendidikan','mp.status_jenis_pekerjaan')->limit($limit)->offset($start)->get();
+        foreach ($rows as $r){
+            $data['data'][]=[$r->nik,$r->nama,$r->alamat,$r->status_jenis_pekerjaan,$r->status_pendidikan,''];
+        }
+        return response()->json($data);
+    }
+    function showListOpd(Request $request){
+        $data=[];
+        $rows=Opd::orderBy('namaopd','asc')->get();
+        $data['opd']=$rows;
+        return view('admin/opd',$data);
     }
 }

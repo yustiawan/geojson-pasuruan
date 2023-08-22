@@ -34,9 +34,10 @@
                             tb+='<tr><td style="height: 30px">Jumlah Desa</td><td></td><td class="kolom-kanan">{{ $kec['jmldesa'] }}</td></tr>'
                             tb+='<tr><td colspan="3" ><button onclick="showDetailKecamatan(\'{{ Crypt::encryptString($kec['idkecamatan']) }}\')" class="btn btn-sm btn-success" style="width:100%">Lihat Perkembangan Data</button></td></tr>'
                             tb+='</table>'
-                            layer.bindPopup(tb);
+                             layer.bindPopup(tb);
                         }
                     }).addTo(map);
+
                     // Tambahkan event "on click" pada marker
                     gg.on('click', function(event) {
 

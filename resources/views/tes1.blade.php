@@ -1,5 +1,6 @@
 @extends('layout')
 @section('content')
+
 <div id="map"></div>
 <form id="frmdetailkecamatan" method="post" action="" target="_blank">
     @csrf
@@ -59,5 +60,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js" integrity="sha512-synHs+rLg2WDVE9U0oHVJURDCiqft60GcWOW7tXySy8oIr0Hjl3K9gv7Bq/gSj4NDVpc5vmsNkMGGJ6t2VpUMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js" integrity="sha512-vg90JFVLzr2nqlpxo2N2XiSRzbnYny4KFQCC5lJ9MvvROQkyQIVaor5CKl46ZPYBAB0WgSliOj9pBuTESp2PHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-@include('geojson')
+@include('tes2')
 @endsection

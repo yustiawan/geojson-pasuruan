@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +19,14 @@ use App\Http\Controllers\AdminController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/tes', [MainController::class,'tes']);
+Route::get('/tes1', [AdminController::class,'tes']);
 Route::get('/main', [MainController::class,'index']);
 Route::get('/dashboard', [MainController::class,'dashboardDetail']);
-Route::prefix('admin')->group(function () {
-    Route::get('/',  [AdminController::class,'index']);
+Route::get('/login', [LoginController::class,'login']);
+Route::post('/login', [LoginController::class,'loginUser']);
+Route::group(['prefix'=>'/admin','middleware'=> ['adminmid']],function () {
+    Route::get('/home',  [AdminController::class,'index']);
     Route::get('/kecamatan',  [AdminController::class,'menuKecamatan']);
     Route::get('/desa',  [AdminController::class,'menuDesa']);
     Route::post('/updatekecamatan',  [AdminController::class,'editKecamatan']);
@@ -33,4 +38,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/settingmap',  [AdminController::class,'showMapConfig']);
     Route::post('/savesettingmap',  [AdminController::class,'saveMapConfig']);
     Route::post('/detailkecamatan',  [MainController::class,'detilKecamatan']);
+    Route::post('/getdatakemiskikanbydesa',  [MainController::class,'getDataKemiskinanByDesa']);
+    Route::get('/datakemiskinan',  [AdminController::class,'dataKemiskinan']);
+    Route::post('/listdatakemiskinan',  [AdminController::class,'getDataKemiskinan']);
+    Route::get('/opd',  [AdminController::class,'showListOpd']);
 });
